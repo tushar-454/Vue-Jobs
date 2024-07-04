@@ -17,6 +17,9 @@ const changeStatus = () => {
 const addTask = () => {
   tasks.value.push(newTask.value);
 };
+const deleteTask = (index) => {
+  tasks.value.splice(index, 1);
+};
 </script>
 
 <template>
@@ -43,7 +46,10 @@ const addTask = () => {
       v-for="(task, index) in tasks"
       :key="index"
     >
-      {{ task }}
+      <span>
+        {{ task }}
+        <button @click="deleteTask(index)">X</button>
+      </span>
     </li>
   </ul>
 </template>
