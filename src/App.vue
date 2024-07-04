@@ -1,23 +1,17 @@
-<script>
-export default {
-  data() {
-    return {
-      name: 'John Dou',
-      status: 'active',
-      tasks: ['Task-1', 'Task-2', 'Task-3'],
-    };
-  },
-  methods: {
-    changeStatus() {
-      if (this.status === 'active') {
-        this.status = 'pending';
-      } else if (this.status === 'pending') {
-        this.status = '';
-      } else {
-        this.status = 'active';
-      }
-    },
-  },
+<script setup>
+import { ref } from 'vue';
+
+const name = ref('John Dou');
+const status = ref('active');
+const tasks = ref(['Task-1', 'Task-2', 'Task-3']);
+const changeStatus = () => {
+  if (status.value === 'active') {
+    status.value = 'pending';
+  } else if (status.value === 'pending') {
+    status.value = '';
+  } else {
+    status.value = 'active';
+  }
 };
 </script>
 
