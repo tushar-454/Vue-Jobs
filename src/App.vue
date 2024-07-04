@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 const name = ref('John Dou');
 const status = ref('active');
@@ -16,10 +16,25 @@ const changeStatus = () => {
 };
 const addTask = () => {
   tasks.value.push(newTask.value);
+  newTask.value = '';
 };
 const deleteTask = (index) => {
   tasks.value.splice(index, 1);
 };
+
+// fetch data from api
+
+onMounted(async () => {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/todos');
+    const todos = await response.json();
+    tasks.value = todos.map((todo) => todo.title);
+    loading = false;
+  } catch (error) {
+    console.log(error);
+  } finally {
+  }
+});
 </script>
 
 <template>
@@ -41,6 +56,7 @@ const deleteTask = (index) => {
     </form>
   </div>
   <h2>Tasks</h2>
+
   <ul>
     <li
       v-for="(task, index) in tasks"
