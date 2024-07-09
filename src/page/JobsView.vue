@@ -1,6 +1,24 @@
 <script setup>
 import JobListCard from '@/components/JobListCard.vue';
+import axios from 'axios';
+import { onMounted, reactive } from 'vue';
 import jobs from '../jobs-copy.json';
+
+const state = reactive({
+  jobs: [],
+  isLoading: true,
+});
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost:8000/jobs');
+    state.jobs = response.data;
+  } catch (error) {
+    console.log('Jobsview Error' + error);
+  } finally {
+    state.isLoading = false;
+  }
+});
 </script>
 <template>
   <!-- Filter Jobs -->
@@ -22,7 +40,10 @@ import jobs from '../jobs-copy.json';
       <h2 class="mb-6 text-center text-3xl font-bold text-green-500">
         Browse Jobs
       </h2>
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div v-if="state.isLoading">
+        <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+      </div>
+      <div v-else class="grid grid-cols-1 gap-6 md:grid-cols-3">
         <JobListCard v-for="job in jobs" :job="job" :key="job.id" />
       </div>
     </div>

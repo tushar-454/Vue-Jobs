@@ -1,12 +1,28 @@
 <script setup>
-import { defineProps } from 'vue';
+import axios from 'axios';
+import { defineProps, onMounted, reactive } from 'vue';
 import { RouterLink } from 'vue-router';
-import jobs from '../jobs-copy.json';
 import JobListCard from './JobListCard.vue';
 
 defineProps({
   limit: Number,
   showButton: Boolean,
+});
+
+const state = reactive({
+  jobs: [],
+  isLoading: true,
+});
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost:8000/jobs');
+    state.jobs = response.data;
+  } catch (error) {
+    console.log('Homeview Error' + error);
+  } finally {
+    state.isLoading = false;
+  }
 });
 </script>
 
@@ -16,10 +32,16 @@ defineProps({
       <h2 class="mb-6 text-center text-3xl font-bold text-green-500">
         Browse Jobs
       </h2>
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div v-if="state.isLoading">
+        <i class="pi pi-spin pi-spinner text-center text-2xl"></i>
+      </div>
+      <div v-else class="grid grid-cols-1 gap-6 md:grid-cols-3">
         <!-- Job Listing 1 -->
         <JobListCard
-          v-for="(job, index) in jobs.slice(0, limit)"
+          v-for="(job, index) in state.jobs.slice(
+            0,
+            limit || state.jobs.length,
+          )"
           :job="job"
           :key="index"
         />
