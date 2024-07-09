@@ -2,11 +2,8 @@
 import { defineProps } from 'vue';
 
 defineProps({
-  title: {
-    type: String,
-    default: 'Vue Jobs',
-  },
-  description: String,
+  title: String,
+  subTitle: String,
 });
 </script>
 
@@ -20,7 +17,7 @@ defineProps({
           {{ title }}
         </h1>
         <p class="my-4 text-xl text-white">
-          {{ description }}
+          {{ subTitle }}
         </p>
       </div>
     </div>
