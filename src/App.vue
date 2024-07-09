@@ -1,7 +1,12 @@
 <script setup>
-import Header from './components/Header.vue';
+import Header from '@/components/Header.vue';
+import Hero from '@/components/Hero.vue';
 </script>
 
 <template>
   <Header />
+  <Hero
+    title="Become a Vue Dev"
+    description="Find the Vue job that fits your skills and needs"
+  />
 </template>
