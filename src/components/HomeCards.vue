@@ -24,7 +24,7 @@ import { RouterLink } from 'vue-router';
             List your job to find the perfect developer for the role
           </p>
           <RouterLink
-            to="/add-jobs"
+            to="/jobs/add"
             class="inline-block rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
           >
             Add Job
