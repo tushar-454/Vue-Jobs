@@ -2,6 +2,7 @@
 import DevAndEmpoly from '@/components/DevAndEmpoly.vue';
 import Header from '@/components/Header.vue';
 import Hero from '@/components/Hero.vue';
+import Jobs from '@/components/Jobs.vue';
 </script>
 
 <template>
@@ -11,4 +12,5 @@ import Hero from '@/components/Hero.vue';
     description="Find the Vue job that fits your skills and needs"
   />
   <DevAndEmpoly />
+  <Jobs />
 </template>
