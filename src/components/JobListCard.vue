@@ -42,7 +42,7 @@ const toggleDescription = () => {
 
       <div class="mb-4 flex flex-col justify-between lg:flex-row">
         <div class="mb-3 text-orange-700">
-          <i class="fa-solid fa-location-dot text-lg"></i>
+          <i class="pi pi-map-marker text-lg"></i>
           {{ job.location }}
         </div>
         <RouterLink

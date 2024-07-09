@@ -1,5 +1,27 @@
 <script setup>
-import { RouterLink } from 'vue-router';
+import axios from 'axios';
+import { onMounted, reactive } from 'vue';
+import { RouterLink, useRoute } from 'vue-router';
+
+const route = useRoute();
+
+const state = reactive({
+  job: {},
+  isLoading: true,
+});
+
+onMounted(async () => {
+  try {
+    const response = await axios.get(
+      `http://localhost:8000/jobs/${route.params.id}`,
+    );
+    state.job = response.data;
+  } catch (error) {
+    console.log('job Error' + error);
+  } finally {
+    state.isLoading = false;
+  }
+});
 </script>
 
 <template>
@@ -14,41 +36,36 @@ import { RouterLink } from 'vue-router';
       </RouterLink>
     </div>
   </section>
-
-  <section class="bg-green-50">
+  <div v-if="state.isLoading">
+    <i class="pi pi-spin pi-spinner text-center text-2xl"></i>
+  </div>
+  <section v-else class="bg-green-50">
     <div class="container m-auto px-6 py-10">
       <div class="md:grid-cols-70/30 grid w-full grid-cols-1 gap-6">
         <main>
           <div
             class="rounded-lg bg-white p-6 text-center shadow-md md:text-left"
           >
-            <div class="mb-4 text-gray-500">Full-Time</div>
-            <h1 class="mb-4 text-3xl font-bold">Senior Vue Developer</h1>
+            <div class="mb-4 text-gray-500">{{ state.job.type }}</div>
+            <h1 class="mb-4 text-3xl font-bold">{{ state.job.title }}</h1>
             <div
               class="mb-4 flex justify-center align-middle text-gray-500 md:justify-start"
             >
-              <i
-                class="fa-solid fa-location-dot mr-2 text-lg text-orange-700"
-              ></i>
-              <p class="text-orange-700">Boston, MA</p>
+              <i class="pi pi-map-marker mr-2 text-lg text-orange-700"></i>
+              <p class="text-orange-700">{{ state.job.location }}</p>
             </div>
           </div>
 
           <div class="mt-6 rounded-lg bg-white p-6 shadow-md">
-            <h3 class="mb-6 text-lg font-bold text-green-800">
-              Job Description
-            </h3>
+            <h3 class="mb-6 text-lg font-bold text-green-800">Description</h3>
 
             <p class="mb-4">
-              We are seeking a talented Front-End Developer to join our team in
-              Boston, MA. The ideal candidate will have strong skills in HTML,
-              CSS, and JavaScript, with experience working with modern
-              JavaScript frameworks such as Vue or Angular.
+              {{ state.job.description }}
             </p>
 
             <h3 class="mb-2 text-lg font-bold text-green-800">Salary</h3>
 
-            <p class="mb-4">$70k - $80K / Year</p>
+            <p class="mb-4">{{ state.job.salary }} / Year</p>
           </div>
         </main>
 
@@ -58,13 +75,10 @@ import { RouterLink } from 'vue-router';
           <div class="rounded-lg bg-white p-6 shadow-md">
             <h3 class="mb-6 text-xl font-bold">Company Info</h3>
 
-            <h2 class="text-2xl">NewTek Solutions</h2>
+            <h2 class="text-2xl">{{ state.job.company.name }}</h2>
 
             <p class="my-2">
-              NewTek Solutions is a leading technology company specializing in
-              web development and digital solutions. We pride ourselves on
-              delivering high-quality products and services to our clients while
-              fostering a collaborative and innovative work environment.
+              {{ state.job.company.description }}
             </p>
 
             <hr class="my-4" />
@@ -72,12 +86,14 @@ import { RouterLink } from 'vue-router';
             <h3 class="text-xl">Contact Email:</h3>
 
             <p class="my-2 bg-green-100 p-2 font-bold">
-              contact@newteksolutions.com
+              {{ state.job.company.contactEmail }}
             </p>
 
             <h3 class="text-xl">Contact Phone:</h3>
 
-            <p class="my-2 bg-green-100 p-2 font-bold">555-555-5555</p>
+            <p class="my-2 bg-green-100 p-2 font-bold">
+              {{ state.job.company.contactPhone }}
+            </p>
           </div>
 
           <!-- Manage -->
