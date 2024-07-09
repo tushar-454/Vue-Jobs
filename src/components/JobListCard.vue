@@ -45,12 +45,12 @@ const toggleDescription = () => {
           <i class="fa-solid fa-location-dot text-lg"></i>
           {{ job.location }}
         </div>
-        <a
-          href="job.html"
+        <RouterLink
+          :to="'/jobs/' + job.id"
           class="h-[36px] rounded-lg bg-green-500 px-4 py-2 text-center text-sm text-white hover:bg-green-600"
         >
           Read More
-        </a>
+        </RouterLink>
       </div>
     </div>
   </div>
