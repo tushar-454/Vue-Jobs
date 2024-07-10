@@ -113,10 +113,10 @@ const deleteJob = async () => {
           <!-- Manage -->
           <div class="mt-6 rounded-lg bg-white p-6 shadow-md">
             <h3 class="mb-6 text-xl font-bold">Manage Job</h3>
-            <a
-              href="add-job.html"
+            <RouterLink
+              :to="'/jobs/edit/' + state.job.id"
               class="focus:shadow-outline mt-4 block w-full rounded-full bg-green-500 px-4 py-2 text-center font-bold text-white hover:bg-green-600 focus:outline-none"
-              >Edit Job</a
+              >Edit Job</RouterLink
             >
             <button
               @click="deleteJob"
