@@ -8,7 +8,7 @@ const props = defineProps({
 const isFullDescription = ref(true);
 const truncatedDescription = computed(() => {
   let description = props.job.description;
-  if (isFullDescription.value) {
+  if (isFullDescription.value && description.length > 90) {
     description = description.substring(0, 90) + '...';
   }
   return description;
@@ -31,7 +31,11 @@ const toggleDescription = () => {
         <div>
           {{ truncatedDescription }}
         </div>
-        <button @click="toggleDescription" class="text-green-500">
+        <button
+          v-if="props.job.description.length > 90"
+          @click="toggleDescription"
+          class="text-green-500"
+        >
           {{ !isFullDescription ? 'Less' : 'More' }}
         </button>
       </div>
