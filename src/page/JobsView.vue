@@ -2,7 +2,6 @@
 import JobListCard from '@/components/JobListCard.vue';
 import axios from 'axios';
 import { onMounted, reactive } from 'vue';
-import jobs from '../jobs-copy.json';
 
 const state = reactive({
   jobs: [],
@@ -44,7 +43,7 @@ onMounted(async () => {
         <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
       </div>
       <div v-else class="grid grid-cols-1 gap-6 md:grid-cols-3">
-        <JobListCard v-for="job in jobs" :job="job" :key="job.id" />
+        <JobListCard v-for="job in state.jobs" :job="job" :key="job.id" />
       </div>
     </div>
   </section>
