@@ -14,9 +14,7 @@ const state = reactive({
 
 onMounted(async () => {
   try {
-    const response = await axios.get(
-      `http://localhost:8000/jobs/${route.params.id}`,
-    );
+    const response = await axios.get(`/api/jobs/${route.params.id}`);
     state.job = response.data;
   } catch (error) {
     console.log('job Error' + error);
@@ -29,7 +27,7 @@ const deleteJob = async () => {
   try {
     const confirm = window.confirm('Are you sure you want to delete this job?');
     if (confirm) {
-      await axios.delete(`http://localhost:8000/jobs/${route.params.id}`);
+      await axios.delete(`/api/jobs/${route.params.id}`);
       toast.success('Job deleted successfully');
       router.push('/jobs');
     }

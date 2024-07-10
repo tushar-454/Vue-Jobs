@@ -83,20 +83,6 @@
         "contactEmail": "contact@ipsumlorem.com",
         "contactPhone": "555-555-5555"
       }
-    },
-    {
-      "id": 943,
-      "type": "Part-Time",
-      "title": "Occaecat fugit elit",
-      "description": "Sed laborum deserunt",
-      "salary": "$175K - $200K",
-      "location": "Ut anim consequuntur",
-      "company": {
-        "name": "Burnett Snider LLC",
-        "description": "Saepe delectus nesc",
-        "contactEmail": "lufilu@mailinator.com",
-        "contactPhone": "+1 (417) 408-5168"
-      }
     }
   ]
 }

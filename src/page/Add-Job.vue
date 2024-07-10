@@ -33,7 +33,7 @@ const formSubmit = async () => {
     },
   };
   try {
-    const response = await axios.post('http://localhost:8000/jobs', newJob);
+    const response = await axios.post('/api/jobs', newJob);
     router.push(`/jobs/${response.data.id}`);
     toast.success('Job added successfully');
   } catch (error) {
