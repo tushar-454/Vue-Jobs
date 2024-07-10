@@ -36,13 +36,13 @@ onMounted(async () => {
       </RouterLink>
     </div>
   </section>
-  <div v-if="state.isLoading">
+  <div v-if="state.isLoading" class="grid">
     <i class="pi pi-spin pi-spinner text-center text-2xl"></i>
   </div>
   <section v-else class="bg-green-50">
     <div class="container m-auto px-6 py-10">
-      <div class="md:grid-cols-70/30 grid w-full grid-cols-1 gap-6">
-        <main>
+      <div class="grid w-full grid-cols-1 gap-6 md:grid-cols-3">
+        <main class="md:col-span-2">
           <div
             class="rounded-lg bg-white p-6 text-center shadow-md md:text-left"
           >

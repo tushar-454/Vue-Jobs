@@ -32,7 +32,7 @@ onMounted(async () => {
       <h2 class="mb-6 text-center text-3xl font-bold text-green-500">
         Browse Jobs
       </h2>
-      <div v-if="state.isLoading">
+      <div v-if="state.isLoading" class="grid">
         <i class="pi pi-spin pi-spinner text-center text-2xl"></i>
       </div>
       <div v-else class="grid grid-cols-1 gap-6 md:grid-cols-3">
