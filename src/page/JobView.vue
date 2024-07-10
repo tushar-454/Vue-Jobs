@@ -1,10 +1,12 @@
 <script setup>
+import router from '@/router';
 import axios from 'axios';
 import { onMounted, reactive } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
+import { useToast } from 'vue-toastification';
 
 const route = useRoute();
-
+const toast = useToast();
 const state = reactive({
   job: {},
   isLoading: true,
@@ -22,6 +24,20 @@ onMounted(async () => {
     state.isLoading = false;
   }
 });
+
+const deleteJob = async () => {
+  try {
+    const confirm = window.confirm('Are you sure you want to delete this job?');
+    if (confirm) {
+      await axios.delete(`http://localhost:8000/jobs/${route.params.id}`);
+      toast.success('Job deleted successfully');
+      router.push('/jobs');
+    }
+  } catch (error) {
+    console.log('Delete job' + error);
+    toast.error('Error deleting job');
+  }
+};
 </script>
 
 <template>
@@ -105,6 +121,7 @@ onMounted(async () => {
               >Edit Job</a
             >
             <button
+              @click="deleteJob"
               class="focus:shadow-outline mt-4 block w-full rounded-full bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-600 focus:outline-none"
             >
               Delete Job
